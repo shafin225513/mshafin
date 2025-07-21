@@ -1,0 +1,23 @@
+artifact_path: file:///C:/Users/smart%20view/Desktop/ahh/mlruns/246474075713972363/models/m-3cca33791ed54860834a60b4880f53b8/artifacts
+flavors:
+  python_function:
+    config:
+      device: null
+    data: data
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pytorch
+    pickle_module_name: mlflow.pytorch.pickle_module
+    python_version: 3.13.1
+  pytorch:
+    code: null
+    model_data: data
+    pytorch_version: 2.7.1+cpu
+mlflow_version: 3.1.1
+model_id: m-3cca33791ed54860834a60b4880f53b8
+model_size_bytes: 4465
+model_uuid: m-3cca33791ed54860834a60b4880f53b8
+prompts: null
+run_id: 69fb24691fd44d98a7a289aa2f4b1899
+utc_time_created: '2025-07-20 13:04:45.719046'

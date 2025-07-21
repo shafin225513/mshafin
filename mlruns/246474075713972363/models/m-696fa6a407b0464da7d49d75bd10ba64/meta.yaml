@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/smart%20view/Desktop/ahh/mlruns/246474075713972363/models/m-696fa6a407b0464da7d49d75bd10ba64/artifacts
+creation_timestamp: 1752843363060
+experiment_id: '246474075713972363'
+last_updated_timestamp: 1752843379771
+model_id: m-696fa6a407b0464da7d49d75bd10ba64
+model_type: null
+name: model
+source_run_id: 073da6dbafea46439f50910ef1de0bd8
+status: 2
+status_message: null
