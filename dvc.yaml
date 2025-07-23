@@ -1,0 +1,12 @@
+stages:
+  train_model:
+    cmd: python train.py
+    deps:
+    - data.csv
+    - train.py
+    params:
+    - train.batch_size
+    - train.epochs
+    - train.learning_rate
+    outs:
+    - model.pt
