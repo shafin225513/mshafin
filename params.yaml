@@ -1,4 +1,4 @@
 train:
-  learning_rate: 0.01
-  epochs: 10
-  batch_size: 3
+  learning_rate: 0.025
+  epochs: 8
+  batch_size: 4

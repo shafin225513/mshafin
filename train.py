@@ -5,6 +5,19 @@ from torch.utils.data import DataLoader, Dataset
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
+import yaml
+
+with open("params.yaml") as f:
+    params = yaml.safe_load(f)
+
+# Access them
+lr = params["train"]["learning_rate"]
+epochs = params["train"]["epochs"]
+batch_size = params["train"]["batch_size"]
+
+# Use these variables in your model code
+print(f"Training with lr={lr}, epochs={epochs}, batch={batch_size}")
+
 
 # Load CSV
 df = pd.read_csv("data.csv",encoding='ISO-8859-1')
@@ -35,7 +48,7 @@ class SimpleDataset(Dataset):
         return self.X[idx], self.y[idx]
 
 train_dataset = SimpleDataset(X_train_tensor, y_train_tensor)
-train_loader = DataLoader(train_dataset, batch_size=2, shuffle=True)
+train_loader = DataLoader(train_dataset, batch_size, shuffle=True)
 
 # Simple Binary Classifier
 class SimpleClassifier(nn.Module):
@@ -49,17 +62,17 @@ class SimpleClassifier(nn.Module):
 
 model = SimpleClassifier(input_dim=X.shape[1])
 criterion = nn.BCELoss()
-optimizer = optim.Adam(model.parameters(), lr=0.01)
+optimizer = optim.Adam(model.parameters(), lr)
 
 # Training Loop
-for epoch in range(5):
+for epoch in range(epochs):
     for inputs, labels in train_loader:
         optimizer.zero_grad()
         outputs = model(inputs)
         loss = criterion(outputs, labels)
         loss.backward()
         optimizer.step()
-    print(f"Epoch {epoch+1}, Loss: {loss.item():.4f}")
+    print(f"Epoch {epoch+1}, Loss: {loss.item():.3f}")
 
 # Save the model
 torch.save(model.state_dict(), "model.pt")
