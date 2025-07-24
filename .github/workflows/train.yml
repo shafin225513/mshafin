@@ -2,38 +2,29 @@ name: Train and Track Model
 
 on:
   push:
-    branches:
-      - master  # Run this CI/CD only when master is updated
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
-  train_model:
+  train:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: 📥 Checkout repo code
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: 🐍 Set up Python 3.10
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.10
+          python-version: '3.10'
 
-      - name: 📦 Install dependencies
+      - name: Install dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install dvc[gs] mlflow
+          pip install dvc
 
-      
-
-      - name: 🚀 Run training pipeline
-        run: dvc repro
-
-      
-
-      - name: 📊 Track with Git (if metrics/model updated)
+      - name: Run training
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add .
-          git commit -m "Auto: updated model and metrics [CI]" || echo "No changes to commit"
-          git push origin master
+          dvc repro
